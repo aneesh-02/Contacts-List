@@ -27,9 +27,34 @@ const path = require("path"); // reqiuiring the path
 app.set("view engine", "ejs"); // to set up ejs
 app.set("views" , path.join(__dirname, "views")); // to join the path of views directory with this server's path
 
-app.get('/',function(req,res)  //.get type of request is used on "/" url to perform the function 
-    {
-        return res.render("home");
-    });  
+// app.get('/',function(req,res)  //.get type of request is used on "/" url to perform the function 
+//     {
+//         return res.render("home");
+//     });  
 
     
+var contactList = [ // created an array of objects 
+    {
+        name: "Aneesh",          //each object has 2 key:value pairs
+        phone : 9999444499
+    },
+
+    {
+        name: "Tony",
+        phone : 6868686868
+    },
+
+    {
+        name: "Peter",
+        phone : 100100100 
+    }
+]
+
+
+app.get('/',function(req,res)  //.get type of request is used on "/" url to perform the function 
+            {
+            return res.render("home", {title : "Contacts List",
+                                   contact_list : contactList} // asigning variables the vars from ejs
+                        );
+            }
+        ); 

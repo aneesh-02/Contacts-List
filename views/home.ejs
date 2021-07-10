@@ -1,9 +1,22 @@
 <html>
     <head>
-        <title>Title</title>
+        <title><%= locals.title%></title>  <!--This is how we send data from ejs to js using <%= %>-->
     </head>
     <body>
-        <h1> Heading 1 : CONTACTS LIST</h1>
-        This page is written in ejs and rendered with express
+        <h1> CONTACTS LIST</h1>
+
+        <div>           <!-- <% %> for elements being used but neen not be printed --> 
+            <ul>
+            <%  for( let i of contact_list)    <!-- accessing variable assigned in render function -->            
+                {                               %>
+                    <li>
+                        <h3><%= i.name %></h3>
+                        <p><%= i.phone %></p>
+                    </li>
+            <%  }                               %>
+            </ul>
+        </div>
+
+
     </body>
 </html>
