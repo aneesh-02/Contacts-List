@@ -27,6 +27,8 @@ const path = require("path"); // reqiuiring the path
 app.set("view engine", "ejs"); // to set up ejs
 app.set("views" , path.join(__dirname, "views")); // to join the path of views directory with this server's path
 
+app.use(express.urlencoded()); // to parse data server using middleware parser
+
 // app.get('/',function(req,res)  //.get type of request is used on "/" url to perform the function 
 //     {
 //         return res.render("home");
@@ -51,10 +53,27 @@ var contactList = [ // created an array of objects
 ]
 
 
-app.get('/',function(req,res)  //.get type of request is used on "/" url to perform the function 
-            {
-            return res.render("home", {title : "Contacts List",
-                                   contact_list : contactList} // asigning variables the vars from ejs
-                        );
-            }
-        ); 
+app.get('/', function(req, res) //.get type of request is used on "/" url to perform the function
+{   
+    return res.render('home',{
+        title: "Contact List",
+        contact_list: contactList  // asigning variables the vars from ejs
+    });
+})
+ 
+     
+app.post('/create-contact', function(req, res)
+{
+    
+        // console.log(req.body);
+    // console.log(req.body.name);
+    // console.log(req.body.phone);
+    // contactList.push({
+        
+    //     name: req.body.name,
+    //     phone: req.body.phone,
+    // })
+    contactList.push(req.body);
+    return res.redirect('/');
+
+});
