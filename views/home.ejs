@@ -1,6 +1,7 @@
 <html>
     <head>
         <title><%= locals.title%></title>  <!--This is how we send data from ejs to js using <%= %>-->
+        <link rel="stylesheet" href="/css/home.css"> <!-- middleware already calls assests so address = relative to this folder now-->
     </head>
     <body>
         <h1> CONTACTS LIST</h1>
@@ -23,6 +24,6 @@
             <input type = "submit" value="Add Contact">
         </form>
 
-
+        <script type="text/javascript" src="/js/home.css"></script>
     </body>
 </html>

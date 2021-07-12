@@ -27,8 +27,6 @@ const path = require("path"); // reqiuiring the path
 app.set("view engine", "ejs"); // to set up ejs
 app.set("views" , path.join(__dirname, "views")); // to join the path of views directory with this server's path
 
-app.use(express.urlencoded()); // to parse data server using middleware parser
-
 // app.get('/',function(req,res)  //.get type of request is used on "/" url to perform the function 
 //     {
 //         return res.render("home");
@@ -61,7 +59,8 @@ app.get('/', function(req, res) //.get type of request is used on "/" url to per
     });
 })
  
-     
+app.use(express.urlencoded()); // to parse data server using middleware parser
+
 app.post('/create-contact', function(req, res)
 {
     
@@ -77,3 +76,5 @@ app.post('/create-contact', function(req, res)
     return res.redirect('/');
 
 });
+
+app.use(express.static("assets")); // middleware to access static files, exp.static calls assets folder to get files
