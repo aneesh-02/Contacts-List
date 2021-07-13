@@ -1,18 +1,23 @@
 <html>
     <head>
         <title><%= locals.title%></title>  <!--This is how we send data from ejs to js using <%= %>-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" href="/css/home.css"> <!-- middleware already calls assests so address = relative to this folder now-->
+        <!-- our css file is added at the end -->
     </head>
     <body>
-        <h1> CONTACTS LIST</h1>
+        <h1 id="page-heading">
+            <i class="fa-solid fa-address-book"></i>
+            My Contacts List
+        </h1>
 
         <div>           <!-- <% %> for elements being used but neen not be printed --> 
-            <ul>
+            <ul >
             <%  for( let i of contact_list)    <!-- accessing variable assigned in render function -->            
                 {                               %>
                     <li>
-                        <h3><%= i.name %></h3>
-                        <p><%= i.phone %></p>
+                        <div><h3><%= i.name %></h3></div>
+                        <div><h4><%= i.phone %></h4></div>
                     </li>
             <%  }                               %>
             </ul>
