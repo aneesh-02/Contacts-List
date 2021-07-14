@@ -11,22 +11,29 @@
             My Contacts List
         </h1>
 
-        <div>           <!-- <% %> for elements being used but neen not be printed --> 
+        <div id="contacts-list-container">           <!-- <% %> for elements being used but neen not be printed --> 
             <ul >
             <%  for( let i of contact_list)    <!-- accessing variable assigned in render function -->            
                 {                               %>
-                    <li>
-                        <div><h3><%= i.name %></h3></div>
-                        <div><h4><%= i.phone %></h4></div>
+                    <li class = "contact">
+                        <div class="details">   
+                            <div><h3><%= i.name %></h3></div>
+                            <div><h4><%= i.phone %></h4></div>
+                        </div>
+                        <div class="delete-button">
+                            <a href="/delete-contact/<%= i.phone %>">  <!--this a tag is linked to the phone of this loop-->
+                                X
+                            </a>
+                        </div>
                     </li>
             <%  }                               %>
             </ul>
         </div>
 
-        <form action = "/create-contact" method="POST">
+        <form id="new-contact-form" action = "/create-contact" method="POST">
             <input type="text" name="name" placeholder="Enter Name">
             <input type="number" name="phone" placeholder="Enter Phone Number">
-            <input type = "submit" value="Add Contact">
+            <input type = "submit" value="Add">
         </form>
 
         <script type="text/javascript" src="/js/home.css"></script>
