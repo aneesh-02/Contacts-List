@@ -1,5 +1,8 @@
 const express = require("express");
 const port = 8500;
+
+const db = require("./config/mongoose"); // requiring the mongooose file
+
 const app = express();
 
 // setting up the server
