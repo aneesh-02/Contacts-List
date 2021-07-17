@@ -2,6 +2,7 @@ const express = require("express");
 const port = 8500;
 
 const db = require("./config/mongoose"); // requiring the mongooose file
+const Contact = require("./models/contact"); // requiring scheema
 
 const app = express();
 
@@ -75,9 +76,21 @@ app.post('/create-contact', function(req, res)
     //     name: req.body.name,
     //     phone: req.body.phone,
     // })
-    contactList.push(req.body);
-    return res.redirect('/');
+    // contactList.push(req.body);
+    Contact.create({               // now no need to push
+        name : req.body.name,       // this is a create function
+        phone : req.body.phone      // it takes in the parameters name and phone
+    }, function(err, newContact){  // and has a function
+        if(err)                     //which handles error
+        {
+            console.log("error in creating a contact!");
+            return;
+        }
 
+        console.log("**********" ,newContact);  // and is no error is found newContact is printed
+        return res.redirect("back");    // and page is returned to back
+    });
+ 
 });
 
 app.use(express.static("assets")); // middleware to access static files, exp.static calls assets folder to get files
