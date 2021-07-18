@@ -57,6 +57,21 @@ var contactList = [ // created an array of objects
 
 app.get('/', function(req, res) //.get type of request is used on "/" url to perform the function
 {   
+
+    Contact.find({}, function(err,contacts){
+        if(err)
+        {
+            console.log("Error in fetching contacts from the database");
+            return;
+        }
+
+        return res.render('home',{
+            title: "Contact List",
+            contact_list: contacts 
+        });
+
+    });
+
     return res.render('home',{
         title: "Contact List",
         contact_list: contactList  // asigning variables the vars from ejs
