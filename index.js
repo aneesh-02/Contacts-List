@@ -66,17 +66,12 @@ app.get('/', function(req, res) //.get type of request is used on "/" url to per
         }
 
         return res.render('home',{
-            title: "Contact List",
+            title: "Contacts List",
             contact_list: contacts 
         });
 
     });
-
-    return res.render('home',{
-        title: "Contact List",
-        contact_list: contactList  // asigning variables the vars from ejs
-    });
-})
+});
  
 app.use(express.urlencoded()); // to parse data server using middleware parser
 
