@@ -105,24 +105,41 @@ app.post('/create-contact', function(req, res)
 
 app.use(express.static("assets")); // middleware to access static files, exp.static calls assets folder to get files
 
+//  TO DELETE WITHOUT THE DATABASE
+// app.get("/delete-contact/:phone",function(req,res)  // get request on this url(we can name it anything) this url is added to the a tag in ejg
+// {                        // /:phone is the query param that comes from yhe /delete-contact url
+//     console.log(req.params);
+//     let phone = req.params.phone;     // to find the phone no: express reads this and asssigns it to let phone
+//                         // phone no will be searched for in the array and if matched will be deleted
+//                         // to delete from array we use splice function
+//     let conatactIndex = contactList.findIndex(contact => contact.phone == phone);
 
-app.get("/delete-contact/:phone",function(req,res)  // get request on this url(we can name it anything) this url is added to the a tag in ejg
-{                        // /:phone is the query param that comes from yhe /delete-contact url
-    console.log(req.params);
-    let phone = req.params.phone;     // to find the phone no: express reads this and asssigns it to let phone
-                        // phone no will be searched for in the array and if matched will be deleted
-                        // to delete from array we use splice function
-    let conatactIndex = contactList.findIndex(contact => contact.phone == phone);
-
-    // now contact.phone that is phone index in contact array is compared to phone ie. incomming req.param
-    // this function is applied on contactList which is the array created where appending happens
-    // findindex is a  predefined function to find index
-    // so if they both are the same, contactIndex becomes true and != -1 else if not found it's -1 
+//     // now contact.phone that is phone index in contact array is compared to phone ie. incomming req.param
+//     // this function is applied on contactList which is the array created where appending happens
+//     // findindex is a  predefined function to find index
+//     // so if they both are the same, contactIndex becomes true and != -1 else if not found it's -1 
     
-    if(conatactIndex != -1) // if contactIndex == index then splice at that index
-    {
-        contactList.splice(conatactIndex,1); // remove this index and append the rest of the array in its place
-    }
+//     if(conatactIndex != -1) // if contactIndex == index then splice at that index
+//     {
+//         contactList.splice(conatactIndex,1); // remove this index and append the rest of the array in its place
+//     }
 
-    return res.redirect("back"); // to go back to the home page
+//     return res.redirect("back"); // to go back to the home page
+// });
+
+// TO DELETE FROM THE DATABASE
+app.get("/delete-contact/:phone", function(req,res)
+{   
+    let id = req.query.id;                          //get the id fromm query in the url
+    Contact.findByIdAndDelete(id, function(err)     // find the contact in the database using the id
+    {
+        if(err)
+        {
+            consol.log("error in deleting an object from database");
+            return;
+        }
+
+        return res.redirect("back");            //  return to back page
+    });
 });
+
